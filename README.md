@@ -1,5 +1,6 @@
 Updated by Ye Chen for the first peer assignment for the reprodcuible research
 submit Rmd, md, and html files as well as folders called figure containing all figures 
+Note that for the knit generated Html, the figures needed are in the folder called "PA1_template_files\figure-html"
 
 ## Introduction
 
