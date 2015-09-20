@@ -1,3 +1,6 @@
+Updated by Ye Chen for the first peer assignment for the reprodcuible research
+submit Rmd, md, and html files as well as folders called figure containing all figures 
+
 ## Introduction
 
 It is now possible to collect a large amount of data about personal

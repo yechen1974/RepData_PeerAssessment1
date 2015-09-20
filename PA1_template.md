@@ -1,26 +1,21 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-author: YE Chen 
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
+YE Chen  
 
 
 ## Part 1 Loading and preprocessing the data
 
-```{r}
+
+```r
 # load the data from the activity.csv file, which is under the current diretory
 
 activity_data<-read.csv("activity.csv")
-
-
 ```
 
 
 ## Part 2: What is mean total number of steps taken per day?
 
-```{r}
+
+```r
 # caculate the total number of the steps taken per day 
 # get the 61 days in the data set
 unique_date <-unique(activity_data$date)
@@ -38,21 +33,37 @@ mean_total_step_per_day<-mean(total_step_per_day,na.rm= TRUE)
 median_total_step_per_day<-median(total_step_per_day,na.rm = TRUE)
 #plot histogram
 hist(total_step_per_day,main = "the histograms of the total steps per day for original activity data",col = "red",breaks=20)
-
-#output to file , put into the subfolder called figure
-  dev.copy(png,file="./figure/hist_original_activity_data.png")
-  dev.off()  # close it
-
 ```
 
-###The mean of total steps per day is `r mean_total_step_per_day`
-###the median of total steps per day is `r median_total_step_per_day`
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+
+```r
+#output to file , put into the subfolder called figure
+  dev.copy(png,file="./figure/hist_original_activity_data.png")
+```
+
+```
+## png 
+##   3
+```
+
+```r
+  dev.off()  # close it
+```
+
+```
+## png 
+##   2
+```
+
+###The mean of total steps per day is 9354.2295082
+###the median of total steps per day is 10395
 
 
 ## Part 3:What is the average daily activity pattern?
 
-```{r}
 
+```r
   # get the interval for each day, it is the same for all days in the activity dataset
 interval<-subset(activity_data,date==unique_date[1])$interval
 daily_mean_interval<-c(1:length(interval))
@@ -76,20 +87,36 @@ library(lattice)
 
 
 xyplot(daily_mean_interval~interval,type = "l",xlab="Interval",ylab = "Number of steps",main="the daily activity (steps) per 5 min interval average all days")
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+
+```r
 #output to file , put into the subfolder called figure
   dev.copy(png,file="./figure/daily_activity_pattern_per_interval.png")
-  dev.off()  # close it
+```
 
 ```
-### the maximum steps for daily activity pattern across all days with 5 min interval is `r max_mean`
-### the interval which has the maximum step for daily activity pattern across all days with 5 min interval is `r interval[max_mean_index]`
+## png 
+##   3
+```
+
+```r
+  dev.off()  # close it
+```
+
+```
+## png 
+##   2
+```
+### the maximum steps for daily activity pattern across all days with 5 min interval is 206.1698113
+### the interval which has the maximum step for daily activity pattern across all days with 5 min interval is 835
 
 
 ## Part 4: Inputing missing values
 
-```{r}
 
+```r
 # calculate the number of missing value
 
 total_num_na<-sum(is.na(activity_data$steps))
@@ -133,19 +160,36 @@ new_mean_total_step_per_day<-mean(new_step_per_day,na.rm= TRUE)
 new_median_total_step_per_day<-median(new_step_per_day,na.rm = TRUE)
 # plot histogram
 hist(new_step_per_day,main = "the histograms of the total steps per day for new activity data",col = "blue",breaks=20)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+
+```r
 #output to file , put into the subfolder called figure
   dev.copy(png,file="./figure/hist_new_activity_data.png")
-  dev.off()  # close it
+```
 
 ```
-###The new mean of total steps per day for the new activity data set (remove NA with mean of a day) is `r new_mean_total_step_per_day`
-###The new median of total steps per day for the new activity data set (remove NA with mean of a day) is `r new_median_total_step_per_day`
+## png 
+##   3
+```
+
+```r
+  dev.off()  # close it
+```
+
+```
+## png 
+##   2
+```
+###The new mean of total steps per day for the new activity data set (remove NA with mean of a day) is 9354.2295082
+###The new median of total steps per day for the new activity data set (remove NA with mean of a day) is 1.0395\times 10^{4}
 ### based on the stragey used (use the mean step of that day to fill in the NA value for each day ), seems no difference between the original and new dataset
 
 ## Part 5: Are there differences in activity patterns between weekdays and weekends?
 
-```{r}
-  
+
+```r
 # add a new colume to the new activity data called "whatday", set to two levels either weekday or weekend.
 # use a new dataset new_activity_data1 with the new column (variable) called whatday, with value either "weekday" or "weekend"
 weekend<-c("Saturday","Sunday")
@@ -182,10 +226,27 @@ f<-rep(0:1,each=length(interval))
 f<-factor(f,labels = c("weekday","weekend"))
 x<-c(interval,interval)
 xyplot(plot_data~x|f,layout=c(1,2),type = "l",xlab="Interval",ylab = "Number of steps",main="the daily activity (steps) per 5 min interval weekday Vs. weekend")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+
+```r
 #output to file , put into the subfolder called figure
   dev.copy(png,file="./figure/weekday_weekend.png")
+```
+
+```
+## png 
+##   3
+```
+
+```r
   dev.off()  # close it
-  
+```
+
+```
+## png 
+##   2
 ```
 
 ### based on the figure showing the comparison, there are differences in activity patterns between weekdays and weekends
